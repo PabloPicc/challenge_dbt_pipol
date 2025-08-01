@@ -1,0 +1,28 @@
+#Un servicio que dentro tenga python y pip-instale dbt
+#Otro servicio que tenga la base (postgres).
+#Un volumen para que el container que tiene la base de postgres pueda hacer mirror con la data cruda (.csv)
+
+version: "3"
+
+services:
+  dbt:
+    container_name: dbt
+    build:
+      context: ./container_python_dbt
+    stdin_open: true # docker run -i
+    volumes:
+      - ./container_python_dbt/:/usr/src/app/
+      - ./mercados_latam/:/mercados_latam/
+    ports:
+        - "8080:8080"
+    
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+
+    environment:
+      - POSTGRES_PASSWORD=S3cret
+      - POSTGRES_USER=pipol
+      - POSTGRES_DB=mercados_latam
+  
