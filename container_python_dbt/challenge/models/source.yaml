@@ -1,0 +1,226 @@
+#Línea general: se documenta el significado de cada atributo por cuestiones de data governance.
+#Cuando se modele, sólo se añadirán descripciones a atributos derivados
+#Se agregan test de fixed values a los atributos categóricos
+#Se agregan tests de not-null a los campos que sirven para identificar un registro:
+#Fecha y hora, canal, marca, producto y versión 
+version: 2
+
+sources:
+  - name: mercados_latam
+    database: mercados_latam
+    schema: public
+    description: BBDD con información de publicidades de méxico y Brasil.
+    
+    tables:
+      - name: brasil_2024_08_31
+        description: Cada registro de esta tabla representa una publicidad que fue emitida en Brasil entre el 17/08/2024 y el 31/08/2024
+        columns:
+          - name: Pais
+            description: Siempre BRASIL
+          - name: Fecha
+            description: Dia en el que se emitió la publicidad en formato dd/mm/YYYY
+            tests:
+              - not_null
+          - name: Hora
+            description: Hora en la que la publicidad fue emitida en formato hh:mm:ss AM/PM
+            tests:
+              - not_null
+          - name: Medio
+            description: Medio de difusión (ej. RD para radio).
+            tests:
+              - accepted_values:
+                  values: ['RD', 'TC', 'TV']
+          - name: Plaza
+            description: Localidad o región de emisión.
+          - name: Red
+            description: Grupo económico o red de la emisora.
+          - name: Emisora
+            description: Canal de TV o estación de radio.
+            tests:
+              - not_null
+          - name: Operador
+            description: Empresa que provee el servicio de televisión.
+          - name: Programa
+            description: Programa de TV/Radio donde se emitió la publicidad.
+          - name: Evento
+            ##Podría hacer un test de accepted values aca pero puedo tener problemas de UNICODE
+            description: Tipo especial de publicidad, como "citacao en vivo".
+          - name: Marca 
+            description: La marca que se publicita.
+            tests:
+              - not_null
+          - name: Producto 
+            description: Producto publicitado.
+            tests:
+              - not_null
+          - name: Sector
+            description: A que se dedica la marca, de manera general.
+          - name: Subsector
+            description: A que se dedica la marca más específicamente.
+          - name: Segmento
+            description: Segmento.
+          - name: Agencia
+            description: Agencia credora de la publicidad.
+          - name: Duracion
+            description: Tiempo en segundos que dura el anuncio.
+          - name: Valor_dolar
+            description: Costo del spot publicitario en dólares.
+          - name: Falla
+            description: Estado de la emisión, si hubo un error.
+          - name: EsPrimera
+            description: True si es el primer día que esta versión de la publicidad sale al aire.
+      - name: brasil_2024_09_01
+        description: Cada registro de esta tabla representa una publicidad que fue emitida en Brasil entre el 18/08/2024 y el 01/09/2024
+        columns:
+          - name: Pais
+            description: Siempre BRASIL
+          - name: Fecha
+            description: Dia en el que se emitió la publicidad en formato dd/mm/YYYY
+            tests:
+              - not_null
+          - name: Hora
+            description: Hora en la que la publicidad fue emitida en formato hh:mm:ss AM/PM
+            tests:
+              - not_null
+          - name: Medio
+            description: Medio de difusión (ej. RD para radio).
+            tests:
+              - accepted_values:
+                  values: ['RD', 'TC', 'TV']
+          - name: Plaza
+            description: Localidad o región de emisión.
+          - name: Red
+            description: Grupo económico o red de la emisora.
+          - name: Emisora
+            description: Canal de TV o estación de radio.
+            tests:
+              - not_null
+          - name: Operador
+            description: Empresa que provee el servicio de televisión.
+          - name: Programa
+            description: Programa de TV/Radio donde se emitió la publicidad.
+          - name: Evento
+            description: Tipo especial de publicidad, como "citacao en vivo".
+          - name: Marca 
+            description: La marca que se publicita.
+            tests:
+              - not_null
+          - name: Producto 
+            description: Producto publicitado.
+            tests:
+              - not_null
+          - name: Sector
+            description: A que se dedica la marca, de manera general.
+          - name: Subsector
+            description: A que se dedica la marca más específicamente.
+          - name: Segmento
+            description: Segmento.
+          - name: Agencia
+            description: Agencia credora de la publicidad.
+          - name: Duracion
+            description: Tiempo en segundos que dura el anuncio.
+          - name: Valor_dolar
+            description: Costo del spot publicitario en dólares.
+          - name: Falla
+            description: Estado de la emisión, si hubo un error.
+          - name: EsPrimera
+            description: True si es el primer día que esta versión de la publicidad sale al aire.
+      - name: mexico_2024_08_30
+        description: Cada registro de esta tabla representa una publicidad que fue emitida en México entre el 24/08/2024 y el 30/08/2024
+        columns:
+          - name: Medio
+            description: Medio de difusión donde se pasa la publicidad.
+          - name: Canal
+            description: Nombre de la emisora.
+            tests:
+              - not_null
+          - name: Estacion/canal
+            description: Nombre de la emisora 2.
+          - name: "Grupo Estación"
+            description: Conglomerado de canales, ej TELEVISA.
+          - name: Grupo_comercial
+            description: Grupo económico o red de la emisora, equivalente a 'Red' en el otro conjunto de datos.
+          - name: "Hora GMT"
+            description: Hora de la emisión del spot en el formato UTC.
+              #- quise hacer not_null pero gracias al nombre del atributo no puedo. Demustro la nulidad en los modelos
+          - name: "Rango Horario"
+            description: Rango de la hora de emisión (ej. 07:00-08:00).
+             #- quise hacer not_null pero gracias al nombre del atributo no puedo. Demustro la nulidad en los modelos
+          - name: "Seg. Truncados"
+          - name: Duracion_programada
+            description: Tiempo en segundos que se estima que durará la publicidad.
+          - name: Marca
+            description: La marca que publicita.
+            tests:
+              - not_null
+          - name: Producto
+            description: El producto publicitado.
+            tests:
+              - not_null
+          - name: Localidad
+            description: Ubicación de la emisión, equivalente a 'Plaza'.
+          - name: Sector
+            description: A que se dedica a grandes rasgos la amrca que publicita.
+          - name: Subsector
+            description: A que se dedica en  más detalle la marca que publicita
+          - name: Categoria
+            description: Categoría
+          - name: Version
+            description: Identificador de la versión del spot.
+          - name: Cobertura
+            description: Si la cobertura es 'Nacional' o 'Local'.
+            tests:
+              - accepted_values:
+                  values: ['LOCAL','NACIONAL']
+          - name: Tipo_spot
+            description: Tipo de anuncio, equivalente a 'Evento'.
+      - name: mexico_2024_08_31
+        description: Cada registro de esta tabla representa una publicidad que fue emitida en México entre el 25/08/2024 y el 31/08/2024
+        columns:
+          - name: Medio
+            description: Medio de difusión donde se pasa la publicidad.
+          - name: Canal
+            description: Nombre de la emisora.
+            tests:
+              - not_null
+          - name: Estacion/canal
+            description: Nombre de la emisora 2.
+          - name: "Grupo Estación"
+            description: Conglomerado de canales, ej TELEVISA.
+          - name: Grupo_comercial
+            description: Grupo económico o red de la emisora, equivalente a 'Red' en el otro conjunto de datos.
+          - name: "Hora GMT"
+            description: Hora de la emisión del spot en el formato UTC.
+             #- quise hacer not_null pero gracias al nombre del atributo no puedo. Demustro la nulidad en los modelos
+          - name: "Rango Horario"
+            description: Rango de la hora de emisión (ej. 07:00-08:00).
+             #- quise hacer not_null pero gracias al nombre del atributo no puedo. Demustro la nulidad en los modelos
+          - name: "Seg. Truncados"
+          - name: Duracion_programada
+            description: Tiempo en segundos que se estima que durará la publicidad.
+          - name: Marca
+            description: La marca que publicita.
+            tests:
+              - not_null
+          - name: Producto
+            description: El producto publicitado.
+            tests:
+              - not_null
+          - name: Localidad
+            description: Ubicación de la emisión, equivalente a 'Plaza'.
+          - name: Sector
+            description: A que se dedica a grandes rasgos la amrca que publicita.
+          - name: Subsector
+            description: A que se dedica en  más detalle la marca que publicita
+          - name: Categoria
+            description: Categoría
+          - name: Version
+            description: Identificador de la versión del spot.
+          - name: Cobertura
+            description: Si la cobertura es 'Nacional' o 'Local'.
+            tests:
+              - accepted_values:
+                  values: ['LOCAL','NACIONAL']
+          - name: Tipo_spot
+            description: Tipo de anuncio, equivalente a 'Evento'.      
+
