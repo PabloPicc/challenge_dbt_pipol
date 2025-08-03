@@ -1,6 +1,6 @@
 --Tipo de materialización: incremental. Para que solo detecte nuevos cambios
 {{ config(
-   materialized="incremental"
+   materialized="view"
 ) }}
 
 

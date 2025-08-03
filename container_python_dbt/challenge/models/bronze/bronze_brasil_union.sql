@@ -1,6 +1,6 @@
 --Tipo de materialización: incremental. Para que solo detecte nuevos cambios
 {{ config(
-   materialized="incremental"
+   materialized="view"
 ) }}
 
 --Se unen todas las tablas de México previamente transformadas y pruneadas
@@ -37,7 +37,7 @@ r.version,
 r.tipo_spot,
 r.valordolar
 FROM row_num_adv r
-WHERE row_num = 1
+WHERE r.row_num = 1
 
 
 

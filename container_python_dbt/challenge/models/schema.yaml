@@ -55,7 +55,12 @@ models:
     config:
           docs:
             node_color: '#C0C0C0'
-
+#Nodos gold: lo que ven las gerencias
+  - name: gold_br_mx
+    description: "Tabla final que nuclea a todos los países"
+    config:
+          docs:
+            node_color: '#FFD700'
 
 
 

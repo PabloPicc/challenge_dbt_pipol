@@ -20,7 +20,12 @@ fecha,
 hora,
 segmento_time,
 duracion, 
-marca, 
+--Aqui es donde se corrige en caso de que no se pasen los tests
+case
+when marca='SPORTFLIX' then '$PORTFLIX'
+when marca='PLAYGOOD' then 'PLAY-GOOD'
+else marca
+end as marca, 
 producto,
 localidad,
 sector,
