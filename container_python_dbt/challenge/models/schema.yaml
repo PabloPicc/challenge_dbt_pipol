@@ -1,0 +1,42 @@
+version: 2
+
+models:
+##Nodos de unión bronze: novedad, campo segmento_time
+  - name: bronze_brasil_union
+    description: "La unión de todos los datasets de Brasil desduplicados y transformados"
+    config:
+          docs:
+            node_color: '#CD7F32'
+    columns:
+      - name: segmento_time
+        description: "Clasificación comercial de los horarios"
+
+  - name: bronze_mexico_union
+    description: "La unión de todos los datasets de Mexico, desduplicados y transformados"
+    config:
+          docs:
+            node_color: '#CD7F32'
+    columns:
+      - name: segmento_time
+        description: "Clasificación comercial de los horarios"
+
+
+#Nodos bronze de prunning/transformación de datos
+  - name: bronze_prune_brasil_01
+    config:
+          docs:
+            node_color: '#CD7F32'
+  - name: bronze_prune_brasil_31
+    config:
+          docs:
+            node_color: '#CD7F32'
+  - name: bronze_prune_mexico_30
+    config:
+          docs:
+            node_color: '#CD7F32'
+  - name: bronze_prune_mexico_31
+    config:
+          docs:
+            node_color: '#CD7F32'
+      
+

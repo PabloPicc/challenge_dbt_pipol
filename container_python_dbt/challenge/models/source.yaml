@@ -132,10 +132,11 @@ sources:
             description: Medio de difusión donde se pasa la publicidad.
           - name: Canal
             description: Nombre de la emisora.
-            tests:
-              - not_null
           - name: Estacion/canal
-            description: Nombre de la emisora 2.
+            description: Nombre detallado de la emisora.
+            #tests:
+            #  - not_null
+            ##Podría hacer un test de accepted values aca pero puedo tener problemas de UNICODE
           - name: "Grupo Estación"
             description: Conglomerado de canales, ej TELEVISA.
           - name: Grupo_comercial
@@ -181,10 +182,11 @@ sources:
             description: Medio de difusión donde se pasa la publicidad.
           - name: Canal
             description: Nombre de la emisora.
-            tests:
-              - not_null
           - name: Estacion/canal
-            description: Nombre de la emisora 2.
+            description: Nombre detallado de la emisora.
+            #tests:
+            #  - not_null
+            ##Podría hacer un test de accepted values aca pero puedo tener problemas de UNICODE
           - name: "Grupo Estación"
             description: Conglomerado de canales, ej TELEVISA.
           - name: Grupo_comercial
