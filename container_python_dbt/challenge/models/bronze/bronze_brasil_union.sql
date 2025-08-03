@@ -19,23 +19,24 @@ row_num_adv as (
     FROM todo_brasil
 )
 select
-Pais,
-medio,
-canal, 
-grupo_comercial,
-fecha,
-hora,
-segmento_time,
-duracion, 
-marca, 
-producto,
-localidad,
-sector,
-subsector,
-segmento,
- version,
- tipo_spot
-FROM row_num_adv
+r.Pais,
+r.medio,
+r.canal, 
+r.grupo_comercial,
+r.fecha,
+r.hora,
+r.segmento_time,
+r.duracion, 
+r.marca, 
+r.producto,
+r.localidad,
+r.sector,
+r.subsector,
+r.segmento,
+r.version,
+r.tipo_spot,
+r.valordolar
+FROM row_num_adv r
 WHERE row_num = 1
 
 

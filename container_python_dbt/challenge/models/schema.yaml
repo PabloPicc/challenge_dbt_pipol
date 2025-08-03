@@ -39,4 +39,23 @@ models:
           docs:
             node_color: '#CD7F32'
       
+#Nodos silver: transformaciones de negocio
+  - name: silver_aggregated_cost
+    description: "Mediana del costo de publicidad por segmento horario en, base a los datos de Brasil"
+    config:
+          docs:
+            node_color: '#C0C0C0'
+  - name: silver_full_cost_brasil
+    description: "Datos completos incluyendo el costo de la publicidad, sin nulos. Cuando es null, se lo reempza por la mediana de costo de publicidad correspondiente a su segmento horario. Se agrega un atributo bool que será True si el costo es verdadero y False si es estimado."
+    config:
+          docs:
+            node_color: '#C0C0C0'
+  - name: silver_full_cost_mexico
+    description: "Datos completos incluyendo el costo de la publicidad, sin nulos. Cuando es null, se lo reempza por la mediana de costo de publicidad correspondiente a su segmento horario. Se agrega un atributo bool que será True si el costo es verdadero y False si es estimado. Mexico no tiene valores de costo asociados a las publicidades así que el flag será siempre False"
+    config:
+          docs:
+            node_color: '#C0C0C0'
+
+
+
 
